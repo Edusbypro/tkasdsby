@@ -1,0 +1,28 @@
+            }
+          } else { 
+            let distance = targetTime - now;
+            let timeStr = formatTimeOnly(distance);
+            if(grpCdEl) { grpCdEl.innerHTML = messagePrefix + timeStr; grpCdEl.style.color = "#f29900"; }
+            btnEl.classList.add("disabled"); btnEl.href = "#"; btnEl.onclick = function() { return false; }; btnEl.innerHTML = "Terkunci";
+          }
+        });
+      }
+
+// Menjalankan Jam Real-Time
+      function jalankanJam() {
+        const now = new Date();
+        const opsiHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const opsiTanggal = { day: '2-digit', month: 'long', year: 'numeric' };
+        const stringHari = opsiHari[now.getDay()];
+        const stringTanggal = now.toLocaleDateString('id-ID', opsiTanggal);
+        const stringJam = now.toLocaleTimeString('id-ID');
+        
+        const clockEl = document.getElementById('live-clock');
+        if(clockEl) clockEl.innerHTML = `📅 ${stringHari}, ${stringTanggal} &nbsp;|&nbsp; ⏰ ${stringJam} WIB`;
+      }
+      setInterval(jalankanJam, 1000);
+      jalankanJam();
+
+    </script>
+  </body>
+</html>
